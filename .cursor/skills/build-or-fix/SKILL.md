@@ -1,6 +1,6 @@
 ---
 name: build-or-fix
-description: Use when you are asked to build or fix something. This handles the end to end stages of building from design, to test to review. Takes as input the DoD (Definition of Done) ie the edsired behaviour from the system.
+description: Use when you are asked to build or fix something. This handles the end to end stages of building from design, to test to review. Takes as input the DoD (Definition of Done) ie the desired behaviour from the system.
 disable-model-invocation: false
 ---
 
