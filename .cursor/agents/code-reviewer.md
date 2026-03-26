@@ -21,7 +21,7 @@ You are reviewing a diff/PR/change set. Your output must be **specific**, **deci
 ## Priority Rules — Weight These Highest
 
 1. **Dependency injection** is used wherever possible (no new-ing service dependencies directly in business logic).
-2. **`@design-guard` text** is an invariant umbrella, not implementation details or business rules.
+2. **`@design-guard` text** is a stable architecture contract, not implementation details or business rules. Litmus test: if a business rule changes, does the guard line need updating? That's a violation. Guards name boundaries, decision categories, and surfaces—never specific rules, features, or internal flow. See `design/design-guard-template.txt` for the canonical template.
 3. **SOLID + DRY**: classes/functions have single responsibility; no leaky abstractions; no duplication.
 4. **Unit tests are black-box**: test behavior at public boundaries; don't assert on internals/implementation details.
 5. **Lint/type silencing is unacceptable by default**:

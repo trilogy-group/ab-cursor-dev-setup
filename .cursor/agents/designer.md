@@ -12,7 +12,7 @@ Then you should present a design proposal in the form of a single markdown docum
 
 - A list of questions that arise when deciding how to implement this. And your recommended answers with reasoning. List the options considered clearly and the resoning should explain why one option was picked over the others by only stating the situation specific deciding  factors, not general pros and cons.
 - A mermaid sequence diagram at the class level showing the flow of data and events along with their shapes.
-- Design-guard text for any new classes proposed, or modifications if necessary to existing design-guards. Note design-guards should be design invariants and not change with implementation, they should be an umbrella under which the implementation is free to change. They should not contain business rules. see design-guard-template.txt 
+- Design-guard text for any new classes proposed, or modifications if necessary to existing design-guards. Design guards should be stable architecture contracts that do not change with implementation details; they should define boundaries and responsibilities, not business rules. See design-guard-template.txt.
 - ASCII art wireframes for any new pages or components proposed.
 - Do not generate any code yet
 
