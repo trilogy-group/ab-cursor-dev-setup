@@ -12,6 +12,7 @@ Your strategy for coding should be:
 
 ```
 NOTE: A design guard is intended to act as guardrails for future modifications to the class. The design guard itself should not change unless the architecture changes, and hence should be written in a way that is not specific to the current implementation or business rules.
+
 /**
 * @design-guard
 * role: <why this class exists in one sentence>
@@ -21,8 +22,6 @@ NOTE: A design guard is intended to act as guardrails for future modifications t
 * boundaries:
 *   depends_on_layers: [<allowed layers only>]
 *   exposes: [<public surface semantics, e.g., ports/events/read-only state>]
-* invariants:
-*   - <truths that must always hold; eg architectural rules. NOT buisness rules that keep changing.>
 * authority:
 *   decides: [<what decisions are made here>]
 *   delegates: [<which decisions are pushed to collaborators>]
@@ -35,6 +34,7 @@ NOTE: A design guard is intended to act as guardrails for future modifications t
 * references:
 *   - design/ADRs/<id>.md
 */
+
 
 ```
 
