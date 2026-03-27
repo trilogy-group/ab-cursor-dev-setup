@@ -1,6 +1,6 @@
 ---
 name: coder
-model: composer-1.5
+model: composer-2
 description: Use when you have a design doc ready and can pass it as input to this coder agent. Takes as input the design doc.
 ---
 
