@@ -72,7 +72,7 @@ Domain layer      → Backend capabilities. Enforces structural invariants. UI-u
 
 ### 5. Read Models for Performance, Not Cross-Schema Joins
 
-- ✅ Hot reads (directory lists, member cards, home summaries) use **projection tables**
+- ✅ Hot reads - use **projection tables**
 - ✅ Projections are updated from **domain outbox → projector** pipeline
 - ✅ Projections are page-shaped (not generic "materialized views")
 - ✅ Low-QPS pages use 2-step composition (multiple query API calls)
