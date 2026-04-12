@@ -124,6 +124,8 @@ curl "https://api.dojo.ti.trilogy.com/knowledge?dojo=devbot&dimension=gotchas&q=
 curl "https://api.dojo.ti.trilogy.com/dojos"
 ```
 
+Optionally pass `?email=you@company.com` to include your private and shared dojos alongside public ones.
+
 > DevBot is **public** — no `x-api-key` header required for any of the above calls.
 
 ---
@@ -136,11 +138,13 @@ Full synthesized answer + sources. Params: `question` (required), `dojo` (defaul
 
 ### `list_dojos`
 
-Domains, stats, suggested questions — fast (~1–2s). Optional param: `email` — include your email to see private/shared dojos alongside public ones.
+Domains, stats, suggested questions — fast (~1–2s). No parameters.
+
+> **REST API only:** `GET /dojos?email=you@company.com` accepts an optional `email` query param to include your private/shared dojos. The MCP tool does not expose this parameter.
 
 ### `search_knowledge`
 
-Raw items (faster, **better for PR review / checklists**). Params: `query` (required), `dojo`, `dimension` (optional), `limit`.
+Raw items (faster, **better for PR review / checklists**). Params: `query` (required), `dojo` (default `"devbot"`), `dimension` (optional), `limit` (default 20, max 50).
 
 **Prefer `search_knowledge`** when you need citeable bullets against a diff; **`ask_dojo`** when you need narrative trade-off analysis.
 
