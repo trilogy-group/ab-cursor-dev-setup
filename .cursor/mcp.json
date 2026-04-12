@@ -1,12 +1,7 @@
 {
   "mcpServers": {
     "agent-dojo": {
-      "command": "uvx",
-      "args": ["--from", "git+https://github.com/kabir-ti/agent-dojo-mcp-server", "agent-dojo-mcp"],
-      "env": {
-        "AGENT_DOJO_API_URL": "https://api.dojo.ti.trilogy.com",
-        "AGENT_DOJO_DEFAULT": "devbot"
-      }
+      "url": "https://mcp-server.ti.trilogy.com/098ab494/sse"
     }
   }
 }

@@ -10,8 +10,8 @@ The **`agent-dojo`** skill adds practitioner-grade engineering knowledge (RAG + 
 - `.cursor/skills/agent-dojo/BRAINLIFT.md` — compressed meta-rules (DOK)
 - `.cursor/mcp.json` — pre-configured MCP server for DevBot Dojo (auto-detected by Cursor)
 
-**API endpoint:** `https://api.dojo.ti.trilogy.com` — DevBot is a **public** dojo, no API key required.
+**MCP Hive endpoint:** `https://mcp-server.ti.trilogy.com/098ab494/sse` — pre-configured in `.cursor/mcp.json`, works out of the box.
 
-**Prerequisites:** Python 3.13+, `uvx` (from `uv`). Install: `curl -LsSf https://astral.sh/uv/install.sh | sh`
+**REST API endpoint:** `https://api.dojo.ti.trilogy.com` — DevBot is a **public** dojo, no API key required.
 
 The orchestrator skill **`build-or-fix`** references `agent-dojo` in the design and verify steps.

@@ -41,9 +41,25 @@ Agent Dojo exposes **DevBot Dojo** (`dojo: "devbot"`) through MCP tools and a RE
 
 The MCP server connects your agent (Cursor, Claude Code, Codex, Gemini CLI) to DevBot Dojo. DevBot is a **public** dojo — no API key required.
 
-### MCP config (`mcp.json`)
+### Option 1: MCP Hive (cloud — no local setup)
 
-Add to your project `.cursor/mcp.json` or user-level MCP settings:
+The server is hosted on MCP Hive. Add to your `.cursor/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "agent-dojo": {
+      "url": "https://mcp-server.ti.trilogy.com/098ab494/sse"
+    }
+  }
+}
+```
+
+This is already configured in this repo's `.cursor/mcp.json`.
+
+### Option 2: Local (uvx — if MCP Hive is unavailable)
+
+Runs the MCP server locally via Python. Add to `.cursor/mcp.json`:
 
 ```json
 {
@@ -62,7 +78,7 @@ Add to your project `.cursor/mcp.json` or user-level MCP settings:
 
 **Prerequisites:** Python 3.13+, `uvx` (from `uv`). Install uv: `curl -LsSf https://astral.sh/uv/install.sh | sh`
 
-### Environment variables
+### Environment variables (local mode only)
 
 | Variable | Value | Purpose |
 |----------|-------|---------|
@@ -70,7 +86,7 @@ Add to your project `.cursor/mcp.json` or user-level MCP settings:
 | `AGENT_DOJO_DEFAULT` | `devbot` | Default dojo for all queries |
 | `AGENT_DOJO_API_KEY` | _(not needed)_ | DevBot is public — no key required |
 
-> For **private** dojos, set `AGENT_DOJO_API_KEY` to the dojo's API key. All requests will include it as `x-api-key`.
+> For **private** dojos, pass `api_key` as a tool parameter or set `AGENT_DOJO_API_KEY` env var.
 
 ---
 
@@ -134,17 +150,15 @@ Optionally pass `?email=you@company.com` to include your private and shared dojo
 
 ### `ask_dojo`
 
-Full synthesized answer + sources. Params: `question` (required), `dojo` (default `"devbot"`), `model` (default `"gpt-5.4"`). Check `graph_context_found` for KG enrichment.
+Full synthesized answer + sources. Params: `question` (required), `dojo` (default `"devbot"`), `model` (default `"gpt-5.4"`), `api_key` (optional, for private dojos). Check `graph_context_found` for KG enrichment.
 
 ### `list_dojos`
 
-Domains, stats, suggested questions — fast (~1–2s). No parameters.
-
-> **REST API only:** `GET /dojos?email=you@company.com` accepts an optional `email` query param to include your private/shared dojos. The MCP tool does not expose this parameter.
+Domains, stats, suggested questions — fast (~1–2s). Optional param: `email` — include your email to see private/shared dojos alongside public ones.
 
 ### `search_knowledge`
 
-Raw items (faster, **better for PR review / checklists**). Params: `query` (required), `dojo` (default `"devbot"`), `dimension` (optional), `limit` (default 20, max 50).
+Raw items (faster, **better for PR review / checklists**). Params: `query` (required), `dojo` (default `"devbot"`), `dimension` (optional), `limit` (default 20, max 50), `api_key` (optional, for private dojos).
 
 **Prefer `search_knowledge`** when you need citeable bullets against a diff; **`ask_dojo`** when you need narrative trade-off analysis.
 
