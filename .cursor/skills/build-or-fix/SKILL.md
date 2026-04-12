@@ -32,7 +32,7 @@ This skill is an orchestrator. It owns process, delegation, approval gates, and 
 - Tell it what behavior is required, what constraints apply, and what must be explicitly covered.
 - It can and will gather whatever context it needs.
 - Do not ask it for code snippets, it has been instructed to work at the design level and knows what to return and in what format. It will put all of that in a .md file
-- For production-impacting or architecture-heavy work, follow the **`devbot-dojo`** skill to ground the design in practitioner knowledge (failure modes, trade-offs, `gotchas` / `architecture_patterns`). Use MCP `ask_dojo` or `search_knowledge` when available; if Dojo is unavailable, proceed but note the gap for the reviewer.
+- For production-impacting or architecture-heavy work, follow the **`agent-dojo`** skill to ground the design in practitioner knowledge (failure modes, trade-offs, `gotchas` / `architecture_patterns`). Use MCP `ask_dojo` or `search_knowledge` when available; if Dojo is unavailable, proceed but note the gap for the reviewer.
 
 ### Approval Gate
 
@@ -51,7 +51,7 @@ This skill is an orchestrator. It owns process, delegation, approval gates, and 
 
 - Use the `precommit-check` subagent to run the precommit checks and fix any errors.
 - Use the `code-reviewer` subagent to review the code. Share the code with it and ask it to review the code.
-- Optionally augment review with **`devbot-dojo`**: `search_knowledge` on dimensions `anti_patterns`, `gotchas`, or `security_practices` for technologies changed in the diff (faster than a full `ask_dojo` synthesis).
+- Optionally augment review with **`agent-dojo`**: `search_knowledge` on dimensions `anti_patterns`, `gotchas`, or `security_practices` for technologies changed in the diff (faster than a full `ask_dojo` synthesis).
 - Address any issues raised by the reviewer before proceeding.
 
 ## 5. Evidence
