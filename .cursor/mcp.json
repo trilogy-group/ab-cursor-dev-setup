@@ -1,7 +1,7 @@
 {
   "mcpServers": {
     "agent-dojo": {
-      "url": "https://mcp-server.ti.trilogy.com/098ab494/sse"
+      "url": "https://mcp-server.ti.trilogy.com/098ab494/sse?x-api-key=sk-hive-api01-MDQ3NjI4ZDgtMjNmNi00MGNmLWI4NjYtYzBmOWNmMjgzOTYx-N2U4YmNjAAA"
     }
   }
 }

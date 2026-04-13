@@ -49,11 +49,13 @@ The server is hosted on MCP Hive. Add to your `.cursor/mcp.json`:
 {
   "mcpServers": {
     "agent-dojo": {
-      "url": "https://mcp-server.ti.trilogy.com/098ab494/sse"
+      "url": "https://mcp-server.ti.trilogy.com/098ab494/sse?x-api-key=sk-hive-api01-MDQ3NjI4ZDgtMjNmNi00MGNmLWI4NjYtYzBmOWNmMjgzOTYx-N2U4YmNjAAA"
     }
   }
 }
 ```
+
+The `x-api-key` query parameter is **required** for the SSE connection — without it the endpoint rejects the request. This is the MCP Hive connection key, not a dojo-level API key.
 
 This is already configured in this repo's `.cursor/mcp.json`.
 
