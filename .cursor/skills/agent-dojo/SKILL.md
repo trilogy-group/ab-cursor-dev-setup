@@ -70,7 +70,7 @@ Runs the MCP server locally via Python. Add to `.cursor/mcp.json`:
       "command": "uvx",
       "args": ["--from", "git+https://github.com/kabir-ti/agent-dojo-mcp-server", "agent-dojo-mcp"],
       "env": {
-        "AGENT_DOJO_API_URL": "https://api.dojo.ti.trilogy.com",
+        "AGENT_DOJO_API_URL": "https://zbjffcjzsnhqay2c5ckc7damky0tvotz.lambda-url.us-east-1.on.aws",
         "AGENT_DOJO_DEFAULT": "devbot"
       }
     }
@@ -84,7 +84,7 @@ Runs the MCP server locally via Python. Add to `.cursor/mcp.json`:
 
 | Variable | Value | Purpose |
 |----------|-------|---------|
-| `AGENT_DOJO_API_URL` | `https://api.dojo.ti.trilogy.com` | REST API endpoint |
+| `AGENT_DOJO_API_URL` | `https://zbjffcjzsnhqay2c5ckc7damky0tvotz.lambda-url.us-east-1.on.aws` | REST API endpoint |
 | `AGENT_DOJO_DEFAULT` | `devbot` | Default dojo for all queries |
 | `AGENT_DOJO_API_KEY` | _(not needed)_ | DevBot is public — no key required |
 
@@ -94,7 +94,7 @@ Runs the MCP server locally via Python. Add to `.cursor/mcp.json`:
 
 ## REST API (direct HTTP)
 
-**Base URL:** `https://api.dojo.ti.trilogy.com`
+**Base URL:** `https://zbjffcjzsnhqay2c5ckc7damky0tvotz.lambda-url.us-east-1.on.aws`
 
 ### Endpoints
 
@@ -121,7 +121,7 @@ Runs the MCP server locally via Python. Add to `.cursor/mcp.json`:
 **curl example:**
 
 ```bash
-curl -sS -X POST "https://api.dojo.ti.trilogy.com/ask" \
+curl -sS -X POST "https://zbjffcjzsnhqay2c5ckc7damky0tvotz.lambda-url.us-east-1.on.aws/ask" \
   -H "Content-Type: application/json" \
   -d '{"question":"What goes wrong with PostgreSQL connection pooling at scale?","dojo":"devbot","model":"gpt-5.4"}'
 ```
@@ -133,13 +133,13 @@ curl -sS -X POST "https://api.dojo.ti.trilogy.com/ask" \
 **Query params:** `dojo` (default `devbot`), `dimension`, `q`, `from`, `size`.
 
 ```bash
-curl "https://api.dojo.ti.trilogy.com/knowledge?dojo=devbot&dimension=gotchas&q=postgres&from=0&size=20"
+curl "https://zbjffcjzsnhqay2c5ckc7damky0tvotz.lambda-url.us-east-1.on.aws/knowledge?dojo=devbot&dimension=gotchas&q=postgres&from=0&size=20"
 ```
 
 ### GET `/dojos`
 
 ```bash
-curl "https://api.dojo.ti.trilogy.com/dojos"
+curl "https://zbjffcjzsnhqay2c5ckc7damky0tvotz.lambda-url.us-east-1.on.aws/dojos"
 ```
 
 Optionally pass `?email=you@company.com` to include your private and shared dojos alongside public ones.

@@ -12,6 +12,6 @@ The **`agent-dojo`** skill adds practitioner-grade engineering knowledge (RAG + 
 
 **MCP Hive endpoint:** `https://mcp-server.ti.trilogy.com/098ab494/sse?x-api-key=...` — pre-configured with API key in `.cursor/mcp.json`, works out of the box.
 
-**REST API endpoint:** `https://api.dojo.ti.trilogy.com` — DevBot is a **public** dojo, no API key required.
+**REST API endpoint:** `https://zbjffcjzsnhqay2c5ckc7damky0tvotz.lambda-url.us-east-1.on.aws` — DevBot is a **public** dojo, no API key required.
 
 The orchestrator skill **`build-or-fix`** references `agent-dojo` in the design and verify steps.
