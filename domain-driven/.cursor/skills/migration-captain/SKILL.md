@@ -198,6 +198,23 @@ After **every migration merge**:
 - **Problem**: Running migration twice causes errors
 - **Solution**: Use `IF NOT EXISTS` / `IF EXISTS` where possible
 
+### ❌ Direct column renames on active tables
+- **Problem**: `ALTER TABLE RENAME COLUMN` breaks old app versions during rolling deploys, plus views, functions, RLS policies, and ORM mappings that reference the old name
+- **Solution**: Treat renames as **breaking API changes**. Use expand-contract:
+  1. **Expand**: `ALTER TABLE ADD COLUMN new_name` (same type, nullable)
+  2. **Dual-write**: Deploy app that writes both old and new columns
+  3. **Backfill**: `UPDATE table SET new_name = old_name WHERE new_name IS NULL`
+  4. **Cut over**: Deploy app that reads from new column only
+  5. **Contract**: Drop old column in a later migration after all consumers are updated
+
+### ❌ Renaming columns used in RLS policies
+- **Problem**: RLS predicates reference column names. A rename makes the policy silently fail — authorization breaks without errors
+- **Solution**: When renaming a column referenced by RLS policies, update ALL policies, functions, and views in the SAME migration. Verify RLS behavior with integration tests after the migration.
+
+### ❌ Supabase ownership mismatch
+- **Problem**: Tables created via the Supabase dashboard are owned by `admin`, but migrations use `postgres`. Permission errors appear when migration-created functions try to alter dashboard-created tables.
+- **Solution**: All schema changes go through migrations, never through the dashboard
+
 ---
 
 ## Workflow summary

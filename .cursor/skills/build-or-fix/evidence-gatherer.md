@@ -21,17 +21,60 @@ If a **Local Supabase:** is required. Start local Supabase with `supabase start`
 
 **Playwright browser:** Run `npx playwright install chromium && npx playwright install-deps chromium` if browsers are not installed.
 
+## Evidence Principle
+
+PR evidence is an **argument**, not a gallery. Every piece of evidence should map to a specific claim:
+
+- **What behavior changed** — the feature or fix being delivered
+- **What could break** — the risks introduced by this change
+- **How you verified it** — evidence that the risks are covered
+- **What remains risky / not covered** — honest gaps the reviewer should know about
+
 ## What to produce
 
-1. **Screenshots** — Write a temporary Playwright spec (e.g. `tests/e2e/evidence-screenshots.spec.ts`) that navigates to the relevant pages and captures screenshots of key states (happy path, empty state, error state, filter/sort variations). Save to `evidence/`.
+### 1. Claim-to-proof mapping
 
-2. **Test results** — Run `PW_TEST_HTML_REPORT_OPEN=never npx playwright test <relevant-spec>` and capture the pass/fail summary.
+Before gathering evidence, list the claims you need to prove. For each claim, decide the right type of evidence:
 
-3. **Evidence README** — Create `evidence/README.md` summarising the screenshots, test results, and edge case coverage.
+| Change type | Good evidence | Not sufficient alone |
+|---|---|---|
+| **UI change** | Before/after screenshots, empty/loading/error/disabled states, responsive states | Just a happy-path screenshot |
+| **Business logic** | Unit tests with edge cases, input/output examples, invariant checks | Just "tests pass" |
+| **API/backend** | Request/response examples, contract tests, error/auth/idempotency behavior | Just a UI screenshot (does NOT prove backend correctness) |
+| **Data migration** | Row count/checksum before and after, backward compatibility notes, rollback verification | Just "migration ran" |
 
-4. **Commit** — Add `evidence/` to the branch. This is a temporary workaround — see below.
+### 2. Non-happy-path checklist
 
-5. **Clean up** — Delete the temporary screenshot spec file after capturing. It served its purpose.
+Verify and show evidence for these scenarios where applicable:
+
+- [ ] Invalid input / validation failure
+- [ ] Empty state (no data yet)
+- [ ] Error state (service unavailable, timeout)
+- [ ] Permission failure (unauthorized user)
+- [ ] Duplicate submission (idempotency)
+- [ ] Boundary values (max length, zero, negative)
+- [ ] Concurrent access (two users at once)
+- [ ] Loading state
+
+### 3. Screenshots
+
+Write a temporary Playwright spec (e.g. `tests/e2e/evidence-screenshots.spec.ts`) that navigates to the relevant pages and captures screenshots of key states (happy path, empty state, error state, filter/sort variations). Save to `evidence/`.
+
+### 4. Test results
+
+Run `PW_TEST_HTML_REPORT_OPEN=never npx playwright test <relevant-spec>` and capture the pass/fail summary.
+
+### 5. Evidence README
+
+Create `evidence/README.md` with the claim-to-proof mapping, screenshots, test results, and which non-happy-path scenarios were verified.
+
+### 6. Commit
+
+Add `evidence/` to the branch. This is a temporary workaround — see below.
+
+### 7. Clean up
+
+Delete the temporary screenshot spec file after capturing. It served its purpose.
 
 ## Screenshot delivery
 
