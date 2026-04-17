@@ -29,6 +29,18 @@ You are reviewing a diff/PR/change set. Your output must be **specific**, **deci
    - Only acceptable if accompanied by a **detailed comment** listing options tried and why they failed.
 6. **Unit-testability**: call out code that is hard to unit test and/or missing unit tests where it should have them.
 
+## Production Incident Patterns — Check These Explicitly
+
+These are patterns that look correct in isolation but cause incidents under load, concurrency, or partial failure. Check for them on every review:
+
+7. **N+1 queries**: Any loop that executes a query per iteration, or any ORM `.map()` / `.forEach()` that triggers lazy loads. Ask: "What happens when N = 10,000?"
+8. **Connection/resource lifecycle**: Code that acquires a DB connection or transaction and then makes an external API call while holding it. The external call's latency becomes the connection's hold time. Under load, this exhausts pools.
+9. **Missing retry/backoff on external calls**: Any HTTP call, queue publish, or third-party API call without retry logic and exponential backoff. Instant retries create retry storms.
+10. **False success (swallowed errors)**: Catch blocks that log and return success, or error handlers that return a default value instead of propagating the failure. A 200 response hiding a failed payment is worse than a 500.
+11. **Check-then-act without atomicity**: Reading a value, making a decision, then writing — without a transaction, lock, or conditional update. Two concurrent requests both pass the check and both act.
+
+For any code touching data at scale, mentally run through: "What happens at N=1, N=100, N=10,000?" and "What happens when two requests do this at the same time?"
+
 ## Additional Hard Design Principles
 
 Use these to find violations, but keep findings concise:
